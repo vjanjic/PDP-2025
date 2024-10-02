@@ -1,0 +1,282 @@
+
+@article{monte,
+title = "Programming heterogeneous parallel machines using refactoring and Monte-Carlo tree search",
+abstract = "This paper presents a new technique for introducing and tuning parallelism for heterogeneous shared-memory systems (comprising a mixture of CPUs and GPUs), using a combination of algorithmic skeletons (such as farms and pipelines), Monte–Carlo tree search for deriving mappings of tasks to available hardware resources, and refactoring tool support for applying the patterns and mappings in an easy and effective way. Using our approach, we demonstrate easily obtainable, significant and scalable speedups on a number of case studies showing speedups of up to 41 over the sequential code on a 24-core machine with one GPU. We also demonstrate that the speedups obtained by mappings derived by the MCTS algorithm are within 5–15% of the best-obtained manual parallelisation.",
+keywords = "Heterogenous parallel computing, Monte-Carlo tree search, Optimisations",
+author = "Brown, {Christopher Mark} and Vladimir Janjic and M. Goli and John McCall",
+year = "2020",
+month = aug,
+doi = "10.1007/s10766-020-00665-z",
+language = "English",
+volume = "48",
+pages = "583–602",
+journal = "International Journal of Parallel Programming",
+issn = "0885-7458",
+publisher = "Springer",
+number = "4",
+
+}
+
+
+@article{malik,
+author = {Malik, Nimra and Sardaraz, Muhammad and Tahir, Muhammad and Shah, Babar and Ali, Gohar and Moreira, Fernando},
+year = {2021},
+month = {06},
+pages = {5849},
+title = {Energy-Efficient Load Balancing Algorithm for Workflow Scheduling in Cloud Data Centers Using Queuing and Thresholds},
+volume = {11},
+journal = {Applied Sciences},
+doi = {10.3390/app11135849}
+}
+
+@article{shankartowards,
+  title={Towards an Operating System Based Framework for Energy-Efficient Scheduling of Parallel Workloads},
+  author={Shankar, Shwetha and Tamir, Dan and Qasem, Apan}
+}
+
+@article{lv,
+author = {Lv, Hao and Guo, Yong and Yang, Liu},
+year = {2021},
+month = {09},
+pages = {012143},
+title = {Study of Energy-Efficient Scheduling in Multi-Core Systems in Dynamic Voltage and Frequency Adjustment},
+volume = {2033},
+journal = {Journal of Physics: Conference Series},
+doi = {10.1088/1742-6596/2033/1/012143}
+}
+
+@INPROCEEDINGS{comprof,
+  author={Kirkpatrick, Ryan and Brown, Christopher and Janjic, Vladimir},
+  booktitle={2022 IEEE 29th International Conference on High Performance Computing, Data, and Analytics (HiPC)}, 
+  title={COMPROF and COMPLACE: Shared-Memory Communication Profiling and Automated Thread Placement via Dynamic Binary Instrumentation}, 
+  year={2022},
+  volume={},
+  number={},
+  pages={236-245},
+  doi={10.1109/HiPC56025.2022.00040}}
+
+@INPROCEEDINGS{teamplay,
+  author={Rouxel, Benjamin and Brown, Christopher and Ebeid, Emad and Eder, Kerstin and Falk, Heiko and Grelck, Clemens and Holst, Jesper and Jadhav, Shashank and Marquer, Yoann and De Alejandro, Marcos Martinez and Nikov, Kris and Sahafi, Ali and Lundquist, Ulrik Pagh Schultz and Seewald, Adam and Vassalos, Vangelis and Wegener, Simon and Zendra, Olivier},
+  booktitle={2023 Design, Automation \& Test in Europe Conference \& Exhibition (DATE)}, 
+  title={The TeamPlay Project: Analysing and Optimising Time, Energy, and Security for Cyber-Physical Systems}, 
+  year={2023},
+  volume={},
+  number={},
+  pages={1-6},
+  doi={10.23919/DATE56975.2023.10137198}}
+
+@inproceedings{CSL-Types,
+author = {Barwell, Adam D. and Brown, Christopher},
+title = {A Trustworthy Framework for Resource-Aware Embedded Programming},
+year = {2021},
+isbn = {9781450375627},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3412932.3412944},
+doi = {10.1145/3412932.3412944},
+abstract = {Systems with non-functional requirements, such as Energy, Time and Security (ETS), are of increasing importance due to the proliferation of embedded devices with limited resources such as drones, wireless sensors, and tablet computers. Currently, however, there are little to no programmer supported methodologies or frameworks to allow them to reason about ETS properties in their source code. Drive is one such existing framework supporting the developer by lifting non-functional properties to the source-level through the Contract Specification Language (CSL), allowing non-functional properties to be first-class citizens, and supporting programmer-written code-level contracts to guarantee the non-functional specifications of the program are met. In this paper, we extend the Drive system by providing rigorous implementations of the underlying proof-engine, modeling the specification of the annotations and assertions from CSL for a representative subset of C, called Imp. We define both an improved abstract interpretation that automatically derives proofs of assertions, and define inference algorithms for the derivation of both abstract interpretations and the context over which the interpretation is indexed. We use the dependently-typed programming language, Idris, to give a formal definition, and implementation, of our abstract interpretation. Finally, we show our well-formed abstract interpretation over some representative exemplars demonstrating provable assertions of ETS.},
+booktitle = {Proceedings of the 31st Symposium on Implementation and Application of Functional Languages},
+articleno = {12},
+numpages = {12},
+keywords = {idris, lightweight verification, non-functional properties, dependent types, embedded systems},
+location = {Singapore, Singapore},
+series = {IFL '19}
+}
+
+@inproceedings{CSL,
+author = {Brown, Christopher and Barwell, Adam D. and Marquer, Yoann and Minh, C\'{e}line and Zendra, Olivier},
+title = {Type-Driven Verification of Non-Functional Properties},
+year = {2019},
+isbn = {9781450372497},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3354166.3354171},
+doi = {10.1145/3354166.3354171},
+abstract = {Energy, Time and Security (ETS) properties of programs are becoming increasingly prioritised by developers, especially where applications are running on ETS sensitive systems, such as embedded devices or the Internet of Things. Moreover, developers currently lack tools and language properties to allow them to reason about ETS. In this paper, we introduce a new contract specification framework, called Drive, which allows a developer to reason about ETS or other non-functional properties of their programs as first-class properties of the language. Furthermore, we introduce a contract specification language, allowing developers to reason about these first-class ETS properties by expressing contracts that are proved correct by an underlying formal type system. Finally, we show our contract framework over a number of representable examples, demonstrating provable worst-case ETS properties.},
+booktitle = {Proceedings of the 21st International Symposium on Principles and Practice of Declarative Programming},
+articleno = {6},
+numpages = {15},
+keywords = {energy, IDRIS, non-functional properties, contracts, proofs, security, time, verification, C},
+location = {Porto, Portugal},
+series = {PPDP '19}
+}
+
+@Inbook{Albers2022,
+author="Albers, Susanne",
+title="Energy-Efficient Scheduling",
+bookTitle="Algorithms for Big Data: DFG Priority Program 1736",
+year="2022",
+publisher="Springer Nature Switzerland",
+address="Cham",
+pages="196--212",
+abstract="We review algorithmic techniques for energy conservation in processing environments handling big data sets. Firstly, we address dynamic speed scaling, where processors can run at variable speed/frequency. The goal is to use the speed spectrum of the processors so as to minimize energy consumption while providing a desired service. Here we focus on multi-processor platforms with heterogeneous CPUs. Secondly, we examine power-down mechanisms where idle devices can be transitioned into low-power standby and sleep states. We consider power-down mechanisms in massively parallel systems, where the components have to coordinate their active and idle periods. In particular we focus on data centers with homogeneous as well as heterogeneous servers.",
+isbn="978-3-031-21534-6"
+}
+
+@article{LU2022237,
+title = {EA-DFPSO: An intelligent energy-efficient scheduling algorithm for mobile edge networks},
+journal = {Digital Communications and Networks},
+volume = {8},
+number = {3},
+pages = {237-246},
+year = {2022},
+issn = {2352-8648},
+doi = {https://doi.org/10.1016/j.dcan.2021.09.011},
+url = {https://www.sciencedirect.com/science/article/pii/S2352864821000717},
+author = {Yao Lu and Lu Liu and Jiayan Gu and John Panneerselvam and Bo Yuan},
+keywords = {Mobile edge computing, Energy-aware systems, Task scheduling, Heuristic algorithms},
+abstract = {Cloud data centers have become overwhelmed with data-intensive applications due to the limited computational capabilities of mobile terminals. Mobile edge computing is emerging as a potential paradigm to host application execution at the edge of networks to reduce transmission delays. Compute nodes are usually distributed in edge environments, enabling crucially efficient task scheduling among those nodes to achieve reduced processing time. Moreover, it is imperative to conserve edge server energy, enhancing their lifetimes. To this end, this paper proposes a novel task scheduling algorithm named Energy-aware Double-fitness Particle Swarm Optimization (EA-DFPSO) that is based on an improved particle swarm optimization algorithm for achieving energy efficiency in an edge computing environment along with minimal task execution time. The proposed EA-DFPSO algorithm applies a dual fitness function to search for an optimal tasks-scheduling scheme for saving edge server energy while maintaining service quality for tasks. Extensive experimentation demonstrates that our proposed EA-DFPSO algorithm outperforms the existing traditional scheduling algorithms to achieve reduced task completion time and conserve energy in an edge computing environment.}
+}
+
+@Article{app11135849,
+AUTHOR = {Malik, Nimra and Sardaraz, Muhammad and Tahir, Muhammad and Shah, Babar and Ali, Gohar and Moreira, Fernando},
+TITLE = {Energy-Efficient Load Balancing Algorithm for Workflow Scheduling in Cloud Data Centers Using Queuing and Thresholds},
+JOURNAL = {Applied Sciences},
+VOLUME = {11},
+YEAR = {2021},
+NUMBER = {13},
+ARTICLE-NUMBER = {5849},
+URL = {https://www.mdpi.com/2076-3417/11/13/5849},
+ISSN = {2076-3417},
+ABSTRACT = {Cloud computing is a rapidly growing technology that has been implemented in various fields in recent years, such as business, research, industry, and computing. Cloud computing provides different services over the internet, thus eliminating the need for personalized hardware and other resources. Cloud computing environments face some challenges in terms of resource utilization, energy efficiency, heterogeneous resources, etc. Tasks scheduling and virtual machines (VMs) are used as consolidation techniques in order to tackle these issues. Tasks scheduling has been extensively studied in the literature. The problem has been studied with different parameters and objectives. In this article, we address the problem of energy consumption and efficient resource utilization in virtualized cloud data centers. The proposed algorithm is based on task classification and thresholds for efficient scheduling and better resource utilization. In the first phase, workflow tasks are pre-processed to avoid bottlenecks by placing tasks with more dependencies and long execution times in separate queues. In the next step, tasks are classified based on the intensities of the required resources. Finally, Particle Swarm Optimization (PSO) is used to select the best schedules. Experiments were performed to validate the proposed technique. Comparative results obtained on benchmark datasets are presented. The results show the effectiveness of the proposed algorithm over that of the other algorithms to which it was compared in terms of energy consumption, makespan, and load balancing.},
+DOI = {10.3390/app11135849}
+}
+@phdthesis{yasir,
+    author = {Alguwaifli, Y},
+     title={Modelling Energy Consumption in Multi-core Systems Using Meta-heuristics and Statistical Modelling},
+    school = {School of Computer Science, University of St Andrews},
+    year = {2023}
+}
+
+@diplomathesis{lieder08energy-efficient-scheduling,
+  author = {Johannes Lieder},
+  title = {Energy-Efficient Scheduling for Multi-Core Processors},
+  type = {Diploma Thesis},
+  address = {System Architecture Group, University of Karlsruhe, Germany},
+  month = nov # "~18",
+  year = 2008,
+  url = {http://i30www.ira.uka.de/teaching/theses/pasttheses/}
+}
+
+@inproceedings{10.1145/945445.945460,
+author = {Yuan, Wanghong and Nahrstedt, Klara},
+title = {Energy-Efficient Soft Real-Time CPU Scheduling for Mobile Multimedia Systems},
+year = {2003},
+isbn = {1581137575},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/945445.945460},
+doi = {10.1145/945445.945460},
+abstract = {This paper presents GRACE-OS, an energy-efficient soft real-time CPU scheduler for mobile devices that primarily run multimedia applications. The major goal of GRACE-OS is to support application quality of service and save energy. To achieve this goal, GRACE-OS integrates dynamic voltage scaling into soft real-time scheduling and decides how fast to execute applications in addition to when and how long to execute them. GRACE-OS makes such scheduling decisions based on the probability distribution of application cycle demands, and obtains the demand distribution via online profiling and estimation. We have implemented GRACE-OS in the Linux kernel and evaluated it on an HP laptop with a variable-speed CPU and multimedia codecs. Our experimental results show that (1) the demand distribution of the studied codecs is stable or changes smoothly. This stability implies that it is feasible to perform stochastic scheduling and voltage scaling with low overhead; (2) GRACE-OS delivers soft performance guarantees by bounding the deadline miss ratio under application-specific requirements; and (3) GRACE-OS reduces CPU idle time and spends more busy time in lower-power speeds. Our measurement indicates that compared to deterministic scheduling and voltage scaling, GRACE-OS saves energy by 7\% to 72\% while delivering statistical performance guarantees.},
+booktitle = {Proceedings of the Nineteenth ACM Symposium on Operating Systems Principles},
+pages = {149–163},
+numpages = {15},
+keywords = {power management, multimedia, mobile computing},
+location = {Bolton Landing, NY, USA},
+series = {SOSP '03}
+}
+
+@article{wanghong,
+author = {Yuan, Wanghong and Nahrstedt, Klara},
+title = {Energy-Efficient Soft Real-Time CPU Scheduling for Mobile Multimedia Systems},
+year = {2003},
+issue_date = {December 2003},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+volume = {37},
+number = {5},
+issn = {0163-5980},
+url = {https://doi.org/10.1145/1165389.945460},
+doi = {10.1145/1165389.945460},
+abstract = {This paper presents GRACE-OS, an energy-efficient soft real-time CPU scheduler for mobile devices that primarily run multimedia applications. The major goal of GRACE-OS is to support application quality of service and save energy. To achieve this goal, GRACE-OS integrates dynamic voltage scaling into soft real-time scheduling and decides how fast to execute applications in addition to when and how long to execute them. GRACE-OS makes such scheduling decisions based on the probability distribution of application cycle demands, and obtains the demand distribution via online profiling and estimation. We have implemented GRACE-OS in the Linux kernel and evaluated it on an HP laptop with a variable-speed CPU and multimedia codecs. Our experimental results show that (1) the demand distribution of the studied codecs is stable or changes smoothly. This stability implies that it is feasible to perform stochastic scheduling and voltage scaling with low overhead; (2) GRACE-OS delivers soft performance guarantees by bounding the deadline miss ratio under application-specific requirements; and (3) GRACE-OS reduces CPU idle time and spends more busy time in lower-power speeds. Our measurement indicates that compared to deterministic scheduling and voltage scaling, GRACE-OS saves energy by 7\% to 72\% while delivering statistical performance guarantees.},
+journal = {SIGOPS Oper. Syst. Rev.},
+month = {oct},
+pages = {149–163},
+numpages = {15},
+keywords = {multimedia, mobile computing, power management}
+}
+
+@ARTICLE{Yonghun,
+  author={Choi, Yonghun and Park, Seonghoon and Jeon, Seunghyeok and Ha, Rhan and Cha, Hojung},
+  journal={IEEE Transactions on Mobile Computing}, 
+  title={Optimizing Energy Consumption of Mobile Games}, 
+  year={2022},
+  volume={21},
+  number={10},
+  pages={3744-3756},
+  doi={10.1109/TMC.2021.3058381}}
+
+@inproceedings{narendran,
+author = {Thiagarajan, Narendran and Aggarwal, Gaurav and Nicoara, Angela and Boneh, Dan and Singh, Jatinder Pal},
+title = {Who Killed My Battery? Analyzing Mobile Browser Energy Consumption},
+year = {2012},
+isbn = {9781450312295},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/2187836.2187843},
+doi = {10.1145/2187836.2187843},
+abstract = {Despite the growing popularity of mobile web browsing, the energy consumed by a phone browser while surfing the web is poorly understood. We present an infrastructure for measuring the precise energy used by a mobile browser to render web pages. We then measure the energy needed to render financial, e-commerce, email, blogging, news and social networking sites. Our tools are sufficiently precise to measure the energy needed to render individual web elements, such as cascade style sheets (CSS), Javascript, images, and plug-in objects. Our results show that for popular sites, downloading and parsing cascade style sheets and Javascript consumes a significant fraction of the total energy needed to render the page. Using the data we collected we make concrete recommendations on how to design web pages so as to minimize the energy needed to render the page. As an example, by modifying scripts on the Wikipedia mobile site we reduced by 30\% the energy needed to download and render Wikipedia pages with no change to the user experience. We conclude by estimating the point at which offloading browser computations to a remote proxy can save energy on the phone.},
+booktitle = {Proceedings of the 21st International Conference on World Wide Web},
+pages = {41–50},
+numpages = {10},
+keywords = {energy consumption, android, mobile browser, offloading computations},
+location = {Lyon, France},
+series = {WWW '12}
+}
+
+@inproceedings {Yoon,
+author = {Chanmin Yoon and Dongwon Kim and Wonwoo Jung and Chulkoo Kang and Hojung Cha},
+title = {{AppScope}: Application Energy Metering Framework for Android Smartphone Using Kernel Activity Monitoring},
+booktitle = {2012 USENIX Annual Technical Conference (USENIX ATC 12)},
+year = {2012},
+isbn = {978-931971-93-5},
+address = {Boston, MA},
+pages = {387--400},
+url = {https://www.usenix.org/conference/atc12/technical-sessions/presentation/yoon},
+publisher = {USENIX Association},
+month = jun
+}
+
+@inproceedings{10.1117/12.2079602,
+author = {Efstathios Stavrakis and Marios Polychronis and Nectarios Pelekanos and Alessandro Artusi and Panayiotis Hadjichristodoulou and Yiorgos Chrysanthou},
+title = {{Toward energy-aware balancing of mobile graphics}},
+volume = {9411},
+booktitle = {Mobile Devices and Multimedia: Enabling Technologies, Algorithms, and Applications 2015},
+editor = {Reiner Creutzburg and David Akopian},
+organization = {International Society for Optics and Photonics},
+publisher = {SPIE},
+pages = {94110D},
+keywords = {energy-aware, mobile graphics, balancing, CPU/GPU},
+year = {2015},
+doi = {10.1117/12.2079602},
+URL = {https://doi.org/10.1117/12.2079602}
+}
+
+@inproceedings{Jadhav:2019:JRWRTC,
+  title = {{Reasoning about non-functional properties using compiler intrinsic function annotations}},
+  author = {Jadhav, Shashank and Roth, Mikko and Falk, Heiko and Brown, Christopher and Barwell, Adam},
+  year = 2019,
+  booktitle = {Proceedings of the 13th Junior Researcher Workshop on Real-Time Computing},
+  location = {Toulouse, France},
+  series = {JRWRTC '19},
+  pages = {25--28},
+  doi = {10.15480/882.2545},
+  url = {https://doi.org/10.15480/882.2545},
+  numpages = 4,
+  keywords = {Compilation, Annotations, Non-functional Properties, Function Inlining}
+}
+
+@Inbook{Weiser1996,
+author="Weiser, Mark
+and Welch, Brent
+and Demers, Alan
+and Shenker, Scott",
+title="Scheduling for Reduced CPU Energy",
+bookTitle="Mobile Computing",
+year="1996",
+publisher="Springer US",
+address="Boston, MA",
+pages="449--471",
+abstract="The energy usage of computer systems is becoming more important, especially for battery operated systems. Displays, disks, and cpus, in that order, use the most energy. Reducing the energy used by displays and disks has been studied elsewhere; this paper considers a new method for reducing the energy used by the cpu. We introduce a new metric for cpu energy performance, millions-of-instructions-per-joule (MIPJ). We examine a class of methods to reduce MIPJ that are characterized by dynamic control of system clock speed by the operating system scheduler. Reducing clock speed alone does not reduce MIPJ, since to do the same work the system must run longer. However, a number of methods are available for reducing energy with reduced clock-speed, such as reducing the voltage [2] [5] or using reversible [7] or adiabatic logic [1]. What are the right scheduling algorithms for taking advantage of reduced clock-speed, especially in the presence of applications demanding ever more instructions-per-second? We consider several methods for varying the clock speed dynamically under control of the operating system, and examine the performance of these methods against workstation traces. The primary result is that by adjusting the clock speed at a fine grain, substantial CPU energy can be saved with a limited impact on performance.",
+isbn="978-0-585-29603-6"
+}
