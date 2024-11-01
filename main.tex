@@ -8,6 +8,9 @@
 \usepackage{textcomp}
 \usepackage{xcolor}
 \usepackage{multirow}
+\usepackage{pgfplots}
+\usepackage{url}
+
 \usepackage[capitalise]{cleveref}
 \crefname{section}{Sec.\@}{Sec.\@}%
 \crefname{subsection}{Sec.\@}{Sec.\@}%
@@ -17,7 +20,7 @@
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \begin{document}
 
-\title{Energy Efficient Scheduling for Mobile Asymmetric Multicore Processors}
+\title{Sleepy Scheduling: \\ Energy Efficient Scheduling for Mobile Asymmetric Multicore Processors}
 
 
 %\author{\IEEEauthorblockN{1\textsuperscript{st} Christopher Brown}
@@ -60,7 +63,7 @@
 \maketitle
 
 \begin{abstract}
-We present a novel adaptive technique for dynamic runtime configuration of asymmetric multicore processors in mobile devices. Our technique measures the current system load of a mobile device, estimates the number of cores of each type (e.g.~high-performance, energy-efficient and balanced cores) and their frequencies that are required for achieving a desired degree of quality of service and then reconfifures the processor to switch off unneeded cores in order to save energy. A near optimal configuration for the current system load is derived using a regression-based machine learning model. We evaluate our technique on a set of novel representative workloads for mobile devices, simulating typical day-to-day user activity on these devices, and demonstrate a reduction in energy consumption of XX\% compared to the default Android operating system scheduler. We also demonstrate that, with the reduced number of cores used,  we are able to achieve the quality-of-service that is within XX\% of the perofrmance under full system.
+We present a novel adaptive technique for dynamic runtime configuration of asymmetric multicore processors in mobile devices. Our technique measures the current system load of a mobile device, estimates the number of cores of each type (e.g.~high-performance, energy-efficient and balanced cores) and their frequencies that are required for achieving a desired degree of quality of service and then re-configures the processor to switch off unneeded cores in order to save energy. A near optimal configuration for the current system load is derived using a regression-based machine learning model. We evaluate our technique on a set of novel representative workloads for mobile devices, simulating typical day-to-day user activity on these devices, and demonstrate a reduction in energy consumption of XX\% compared to the default Android operating system scheduler. We also demonstrate that, with the reduced number of cores used,  we are able to achieve the quality-of-service that is within XX\% of the performance under full system.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -148,16 +151,18 @@ This is illustrated in the next experiment, where we execute the same web browse
 %\textbf{VJ: These results don't make sense. How is it possible that we get almost 2.5 better performance with one small core, compared to all cores? Something has to be wrong here.}}
 \label{tab:energyweb}
 \centering
-\begin{tabular}{|c|c|c|c|c|}
+\begin{tabular}{|c|c|c|c|c|c|c|c|}
 \hline
-\textbf{Cores On} & \textbf{Energy} & \textbf{Energy Diff} &  \textbf{QoS} & \textbf{QoS Diff} \\
+\textbf{Cores On} & \textbf{Power} & \textbf{Energy (J)} & \textbf{Energy Diff} &  \textbf{FPS} & \textbf{FPS Diff} & \textbf{Janky} & \textbf{Janky Diff} \\
 \hline
-      All &  727 J &     \textbf{0\%}  & 0.55 Janky FPS & \textbf{0\%} \\ 
-      1S & 574 J & \textbf{-21.06\%} & 1.90 Janky FPS & \textbf{242.69\%} \\
-      2S & 603 J & \textbf{-17.10\%} & 1.37 Janky FPS & \textbf{148.07\%} \\
-      4S & 571 J & \textbf{-21.46\%} & 0.71 Janky FPS & \textbf{27.86\%} \\
-      4S + 2M & 588 J & \textbf{-19.122\%} & 0.48 Janky FPS & \textbf{-14.13\%}\\
-      4S + 2L & 850 J &  \textbf{16.88\%} & 0.30 Janky FPS & \textbf{-46.65\%}\\
+      All & 0.98 & 117.6J & \textbf{0\%}  & 32.18 & \textbf{0\%} & 1.73 & \textbf{0\%}  \\ 
+      1S & 0.73 & 87.6J & \textbf{34.25\%} & 32.82 & \textbf{-1.95\%}  & 11.19 & \textbf{-84.54\%} \\
+      2S & 0.73 & 87.6J & \textbf{34.25\%} & 33.53 & \textbf{-4.03\%} & 5.1 & \textbf{-66.08\%} \\
+      4S & 0.71 & 85.2J & \textbf{38.03\%} & 33.38 & \textbf{-3.59\%} & 1.86 & \textbf{-6.99\%} \\
+      4S + 2M & 0.78 & 93.6J & \textbf{25.64\%} & 32.43 & \textbf{-0.77\%} &1.67 & \textbf{3.59\%} \\
+      2M + 1S & 0.96 & 115.2J & \textbf{2.08\%} & 33 & \textbf{-2.48\%}  & 1 & \textbf{73\%} \\
+      2M + 2L + 1S & 1.21 & 145.2J & \textbf{-19.01\%}  & 29.55 & \textbf{8.9\%} & 0.51 & \textbf{239.22\%} \\
+      2L + 1S & 1.2 & 144J & \textbf{-18.33\%} & 33.74 & \textbf{4.62\%} & 0.63 & \textbf{174.6\%} \\
       
       \hline
 \end{tabular}
@@ -255,7 +260,7 @@ Here there are 11 different frequencies for the small processors (ranging from 3
 \begin{figure*}[t]
 \begin{center}
 %\includegraphics[scale=0.5]{ims/workflow.pdf}
-\includegraphics[scale=0.6]{ims/EuroPar2024Tool.pdf}
+\includegraphics[scale=0.7]{ims/EuroPar2024Tool.pdf}
 \end{center}
 \caption{Optimal CPU configuration workload.}
 %\caption{Our energy efficient scheduling workflow: the workload of the system, comprising a number of tasks, is analysed and the load of the system is estimated. This estimation is passed through the regression model, which estimates the cost (in terms of performance and energy consumption) of executing the workload under every possible CPU configuration, where a configuration denotes all the cores that are switched on and their frequencies. For example, the configuration (2s, fr1, fr2) is the configuration where two small cores are switched on, and they operate on frequencies fr1 and fr2. The list of estimated costs for each configuration is then passed to the configuration selector, which selects an optimal configuration. This configuration is then passed to the configuration module, which is a part of the Android kernel that switches off the cores that are not to be used (by preventing any tasks being scheduled on them) and sets the appropriate frequency of the ones that should be kept on. This whole process is repeated periodically (by default, every 100ms).}
@@ -282,7 +287,7 @@ We estimate system utilisation by considering the ratio of the predicted perform
 
 \begin{figure*}[ht]
 \begin{center}
-\includegraphics[scale=0.5]{ims/RegressionPaper.pdf}
+\includegraphics[scale=0.52]{ims/regression2.pdf}
 \end{center}
 %\caption{Our configuration selector workflow. A number of configurations of cores (e.g. small, medium and large) are profiled against a synthetic benchmark, resulting in a characterisation of the configurations against their performance and energy profiles. We then use a regression model over these configurations to predict the entire space of performance and energy metrics for the entire space of configurations that are available on the device. A Configuration Selector then determines from these which is the best configuration to use given the current workload of the system as it is running.}  
 \caption{Workflow for deriving a table of the best processor configurations for a given system load.}
@@ -328,44 +333,141 @@ Our technique for selecting the best processor configuration is implemented thro
 %%\label{tab:devicespecs}
 %%\end{table}
 
-In this section we evaluate our regression model and configuration selector from~\cref{sec:energyschedule} on a number of scenarios for Android that are designed to simulate realistic workloads and usage. These scenarios are described in~\cref{sec:scenarios}. We evaluate our scheduler over these scenarios on a Pixel 6a device (given in~\cref{tab:devicespecs}), comparing the energy savings from our energy-efficient scheduler against the default Android scheduler%, including the battery saving mode. 
-We also measure the Quality of Service achieved for each scenario to check that we are sacrificing quality of service too much in gaining energy efficiency. We first describe our techniques for measuring energy and Quality of Service in~\cref{sec:measureeneryqos}, and then give results in~\cref{sec:scenarios}.
-
+In this section we evaluate our \emph{Sleepy Scheduler} (comprising our regression model and configuration selector from~\cref{sec:energyschedule}) on a number of hand-crafted scenarios for Android that are designed to simulate realistic workloads and usage; these scenarios are described in~\cref{sec:scenarios}. We evaluate our \emph{Sleepy Scheduler} over these scenarios on a Google Pixel 6a mobile device running Android (full specifications of the device and the OS are given in~\cref{tab:devicespecs}), comparing the energy savings from our energy-efficient scheduler against the default Android scheduler. %, including the battery saving mode. 
+We also measure the Quality of Service by capturing the frames per second (FPS) measured across the benchmark run, we also include a \emph{janky} measurement (described in~\cref{sec:measureeneryqos}), to give an indication of the number of total frames that were dropped during the rendering process. Our QoS measurements are an attempt to evaluate how much QoS our \emph{Sleepy Scheduler} sacrifices in order to gain energy efficiency. Our techniques for measuring energy and Quality of Service are presented in~\cref{sec:measureeneryqos}; our results are presented in~\cref{sec:scenarios}.
 
 \subsection{Measuring Energy and Quality of Service} \label{sec:measureeneryqos}
 
 
 The Pixel 6a device features Samsung \emph{s2mpg10} and \emph{s2mpg11} power supply chips. These provide the main voltage rails used on the device and have internal current and voltage sensors. The ICs can be configured to integrate and report total energy for a user-controlled subset of the rails via their I$^2$C interfaces. For this work we used these reported energy values, which are not affected by the presence of external power or the current charge/health of the device's battery.
 
-Our technique relies on intentionally reducing the performance of the device in situations where it is not required. Therefore, direct measurements of CPU performance are not suitable for evaluating the technique. As an appropriate proxy for the end-user's experience using the device, we instead opted to use Android's notion of \emph{janky} UI frames. These measure the number of dropped frames that failed to be rendered and presented to the display within the required time limit, leading to a subjective experience of a stuttering and lagging device. We capture the cumulative number of \emph{janky} frames before and after each run and compute the total number of \emph{janky} frames per second, the total number of \emph{non-janky} frames per second, and the percentage of rendered frames that were \emph{janky}.
+Our technique relies on intentionally reducing the performance of the device in situations where it is not required. Therefore, direct measurements of CPU performance are not suitable for evaluating the technique. As an appropriate proxy for the end-user's experience using the device, we instead opted to use Android's notion of \emph{janky} UI frames, which measure the number of dropped frames that failed to be rendered and presented to the display within the required time limit, leading to a subjective experience of a stuttering and lagging device. We capture the cumulative number of \emph{janky} frames before and after each run and compute the total number of \emph{janky} frames per second, the total number of \emph{non-janky} frames per second, and the percentage of rendered frames that were \emph{janky}.
 
 \subsection{Use Case Scenarios and Results} \label{sec:scenarios}
-We evaluate our technique over five use case scenarios, representing a realistic use of mobile phones by typical users. Our goal was to test our processor configuration method on these scenarios and to achieve measurable improvements in energy consumption. The considered scenarios, all of which are available as C++ programs at https://github.com/yalmalaq/scenarios, are:
+We evaluate our technique over ten use case scenarios\footnote{available at \url{https://github.com/yalmalaq/energise}}, representing a realistic use of mobile phones by typical users. Our goal was to test our processor configuration method on these scenarios and to achieve measurable improvements in energy consumption. Each scenario runs for exactly two minutes, and then shuts down. The scenarios execute entirely automatically, without any user interaction required. User gestures and interactivity is simulated by activated the \texttt{input} command. For example \texttt{system("input touchscreen swipe 100 1500 100 200")} allows us to simulate scrolling on the device's touchscreen; other similar commands to \texttt{input} enable other activities, such as swiping and pressing the screen at precise locations. 
+We describe each scenario briefly here.
 %XX \CB{need a public repo}
 
 %\begin{enumerate}
  %   \item Description of the use-case:
     \begin{itemize}
+
+\item \textbf{web}: This scenario models the activity of web browsing: the web browser app (\emph{jelly}) is started, and several websites are loaded, in turn, each for 40 seconds (\emph{YouTube}, \emph{Reddit}, \emph{BBC News}, \emph{The Guardian}). On each website, we activate periodic scrolling up and down on the screen, to simulate the user activity.
     
-\item \textbf{Social Media}: This scenario models the foreground use of two well-known social media applications, Twitter (X) and TikTok. The benchmark starts by opening the X app and navigating the tweets in the timeline for one minute. Then, a new tweet is created, after which the TikTok app is opened and videos from it are played for one more minute.
+\item \textbf{social}: This scenario models the foreground use of a well-known social media application, Twitter (X). The benchmark starts by opening the X app and navigating the tweets in the timeline for two minutes. 
 
-\item \textbf{Web browsing}: This scenario models web browsing, including reading text and watching videos from websites. The web browser app is started, and different websites are loaded, each for 30 seconds (BBC, Daily Mail, Vice and Reddit). On each website, we simulate slow scrolling up and down on the screen, to simulate the user activity.
+\item \textbf{music}: This scenario models playing random music through the loudspeaker for 2 minutes, using the \emph{SoundCloud} website. 
 
-\item \textbf{Game Playing:} This scenario models playing video games. The game app is called OfflineGames, which offers many games. One of the games that requires movement and touch on the screen is picked, and then automatically played for 2 minutes.
+\item \textbf{game:} This scenario models playing video games. The benchmark starts by loading the \emph{Flow Free}\footnote{\url{https://www.bigduckgames.com/flowfree}} app and starts a new game. User activity is simulated by periodic automatic activation of the touchscreen to simulate swiping, touching the screen at various points and scrolling. 
 
-\item \textbf{Background Music}: This scenario models playing random music in the background of the mobile for 2 minutes, using the SoundCloud application. 
 
-\item \textbf{Video Call:} This scenario makes a video call using the Microsoft Teams app. The call lasts for 2 minutes.
+\item \textbf{youtube:} This scenario models watching a video (Andr\'{a}s Schiff giving a masterclass on Beethoven\footnote{https://www.youtube.com/watch?v=VMV0O7cQRuU}) on \emph{YouTube} with the sound played through the device's loudspeaker. 
 
-\item \textbf{Idle:} In this benchmark, no user applications are running in the foreground. All that is running are background system tasks. 
+\item \textbf{book}: This scenario simulates using the device to read a book. A chapter of John Milton's \emph{Paradise Lost} is loaded from the Gutenberg website. Periodic scrolling is then activated, to simulate reading of the text. 
+
+\item \textbf{video}: This scenario simulates using the device's camera to capture a video with audio for two minutes. 
+
+\item \textbf{maps}: This scenario models using the \emph{Google Maps} app to first locate \emph{St Andrews}, and then, through periodic automatic touchscreen gestures, the scenario proceeds to scroll to different locations, with periodic zooming. 
+
+\item \textbf{nav}: This scenario is similar to \textbf{map} but also requires use of the device's GPS. The \emph{Google Maps} app is loaded, the \emph{centre location} is activated, a nearby town is selected, and the app proceeds to give directions by polling the GPS device. 
+
+\item \textbf{idle:} In this benchmark, no user applications are running in the foreground. However, background system tasks will execute as normal. 
 \end{itemize}
 
 %\item 
 \noindent
 %Results: This part discusses the results of the energy and power consumption data obtained after executing the benchmarks of android application scenarios across ten samples using all 8 cores. It is clear that there were varying degrees of percentage decreases in most of the benchmarks in battery saver mode compared to the baseline. For instance, the significant impact of the battery saver on power consumption was on the Idle benchmark of approximately 37.28\%. Social media comes after in terms of a percentage change of about 27\%. Whereas the power result in the battery saver and the baseline setting were quite similar for the Web browsing and Video call benchmarks. Energy, in contrast, shows Idle and Social media benchmarks showing the highest percentage of energy savings of about 26\%. A slight impact was shown in background music and video playing of about 2.6\% and 8\%, respectively. However, the web browsing benchmark indicates the baseline setting outperforms the battery saver by around 15.89\%.
 
-\noindent
-\cref{tab:usecase} shows our preliminary results so far obtained on the Pixel 6a device, where we only report evaluation figures for three of the benchmarks (idle, social media and web) due to unforeseen crashing in the execution. The idle benchmark performs slightly worse in terms of energy with our technique, reporting 27 J of energy instead of 25 J in the baseline case. The frames-per-second (FPS) and the Janky frames can not be measured for the idle application. For social media, our technique performs much better, with 59.61 J of energy vs. 117.72 J in the baseline case, a 50.62\% decrease in energy consumption. Unfortunately, however, the QoS drops, from 44 FPS and 0.7 Janky frames in the basecase, to 12 FPS and 88.9 Janky frams for our technique. Finally the web application performs better too: 54 J of energy consumption vs. 169 J of energy consumption in the baseline case, a 68\% reduction in energy consumption. Again, however, the QoS drops, from 30 FPS to 10 FPS and 1.34 Janky frames to 85 Janky frames. We believe the drops in QoS are due to an over agresssive selection filter being applied. We intend to tune this selection figure and fix the crashing issues for the final submission of the paper. 
+\begin{table*}
+\renewcommand{\arraystretch}{1.3}
+\caption{mean values of baseline compared with the \emph{Sleepy Scheduler} technique using 8 cores across 5 runs.}
+\label{tab:usecase}
+\centering
+%\resizebox{12cm}{!}{
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+\textbf{Benchmark} & \textbf{Base Energy} & \textbf{Our Energy} &  \textbf{Base FPS} & \textbf{Our FPS} & \textbf{Base Janky} & \textbf{Our Janky} \\
+\hline
+    web     & 124.87 &  77.14 & 32.33 & 29.38 & 1.06 & 8.4    \\
+    social  & 72.96  &  84.79 & 40.44 & 37.59 & 0.9  & 14.11  \\ 
+    music   & 53.9   &  40.25 & 58.49 & 41.66 & 0.06 & 15.64  \\
+    game    & 71.59  & 56.3   & 15.43 & 6.67  & 1.02 & 49.64  \\
+    youtube & 97.16  & 74.93  & 50.28 & 49.80 & 0.23 & 2.96   \\
+    book    & 19.23  & 27.69  & 3.72  & 2     & 0.89 & 41.08  \\
+    video   & 211.2  & 206.4  & 27.57 & 27.57 & 0.08 & 0.09   \\
+    maps    &  87.6  & 81.6   & 3.92  & 2.52  & 1.95 & 0      \\
+    nav     & 74.4   & 63.6   & 5.12  & 5.01  & 1.96 & 1.8      \\
+    idle    & 17.56  & 17.52  & N/A   & N/A   & N/A  & N/A    \\
+
+
+     % 4S & 730 J & \textbf{-9.75\%} & 1.58 JFPS & \textbf{170.5\%} \\
+     % 4S + 2M & 721 J & \textbf{-10.86\%} & 0.56 JFPS & \textbf{-3.9\%}\\
+     % 4S + 2L & 1057 J &  \textbf{30.717\%} & 0.54 JFPS & \textbf{-6.8\%}\\
+     % Our system & X J &  \textbf{X\%} & X & \textbf{X\%}\\
+      \hline
+\end{tabular}
+%}
+
+\end{table*}
+
+\noindent 
+The results for our ten scenarios are given in\cref{tab:usecase}, where we report, for each scenario, the total energy consumed, the FPS, and the number of \emph{janky} frames. We compare each scenario with a \emph{base} run, where we use the default Android scheduler. Each scenario is executed 5 times, with each statistic calculated as an average over these 5 runs. \textbf{web} performs the best, with our \emph{Sleepy Scheduler} consuming an average of only 77.14 J of energy compared to the base run of 124.87 J (a saving of 44.73 J). The FPS is only mildly affected, with \emph{Sleepy Scheduler} performing 29.38 vs. 32.33. \textbf{social} seems to perform the worst out of all the scenarios, with \emph{Sleepy Scheduler} consuming 84.79 J of energy vs. 72.96 J (a difference of 11.83 J), but will little loss of FPS (37.59 vs. 40.44 in the base run). \textbf{music} performs well, with \emph{Sleepy Scheduler} consuming an average of 40.25 J vs. 53.9 J in the base run (a saving of 13.65 J). The FPS are somewhat affected, however, with a loss of 16.83 FPS on average (although this doesn't seem to matter too much to the QoS as the scenario is playing music through a speaker). \textbf{youtube} again performs well under the \emph{Sleepy Scheduler} with 74.93 J of energy consumption vs. 97.16 (a saving of 22.23 J), with only a very small difference in FPS obtained: 49.80 vs. 50.28 in the base run. \textbf{book} unfortunately does not save energy over the base run, with the \emph{Sleepy Scheduler} consuming 27.69 J of energy on average vs. 19.23 J. The FPS are only mildly affected, however, with 2 FPS vs. 3.72 in the base run. \textbf{video} performs reasonable well, with the \emph{Sleepy Scheduler} consuming 206.4 J of energy on average vs. 211.2 J in the base run. The FPS in this scenario seems exactly comparable to the base run, indicating no loss of QoS. \textbf{maps} performs reasonably well, with the \emph{Sleepy Scheduler} consuming 81.6 J of energy compared to 87.6 J (a saving of 6 J), with little loss of FPS (2.52 vs. 3.92). \textbf{nav}, again, performs well, with the \emph{Sleepy Scheduler} consuming 63.6 J of energy vs. 74.4 J in the base run. Again, the FPS are not compromised, with 5.01 vs. 5.12 in the base run. The idle scenario is interesting, as it shows the energy consumed by the \emph{Sleepy Scheduler} is comparable to that of the default Android scheduler under idle operation, with 17.52 J vs. 17.56 J. 
+
+\begin{figure}
+%\pgfsetplotmarksize{0pt}
+\begin{tikzpicture}[scale=0.96] 
+   \begin{axis}[
+   legend pos = north west,
+   xlabel=\emph{Time (Seconds)},ylabel=\emph{Instantaneous Power},
+   ymax=12,
+ %  xtick={1,2,..,119},
+   ytick={1,2,3,4,5,6,7,8,9,10,11,12},
+      	cycle list={
+		{blue,mark=star},
+		{red,mark=diamond},
+		{brown!60!black,mark=triangle},
+		{blue,mark=star},
+		{red,mark=diamond},
+		{brown!60!black,mark=triangle},
+	},
+   ]
+
+    \addplot table[x index=0, y index=1] {results/energy_trace_normal.txt};
+
+    \addplot table[x index=0, y index=1] {results/sleepy_energy.csv};
+
+
+    \legend{\emph{Android Default}, \emph{Sleepy Sched}}
+\end{axis}
+\end{tikzpicture}
+\caption{A trace of instantaneous power for the \textbf{web} application for both the \emph{Sleepy Scheduler} and the default Android scheduler. }
+\label{graph:energytrace}
+\end{figure}
+
+\begin{figure*}
+\begin{center}
+\includegraphics[scale=0.04]{ims/graph2.png}
+\end{center}
+\caption{A trace of the Pixel 6a core activation for the \textbf{web} scenario using the \emph{Sleepy Scheduler}.}
+\label{fig:coreson}
+\end{figure*}
+
+\begin{figure*}
+\begin{center}
+\includegraphics[scale=0.5]{ims/graph_means.png}
+\end{center}
+\caption{A trace of the frequency change for each Pixel 6a core for the \textbf{web} scenario using the \emph{Sleepy Scheduler}. }
+\label{fig:freq}
+\end{figure*}
+
+\cref{graph:energytrace} gives a trace of the instantaneous power consumption for the \textbf{web} scenario for both the \emph{Sleepy Scheduler} (shown in red) and the default Android scheduler (shown in blue). Instantaneous power refers to the power consumed by the device at a particular point in time, and is calculated by measuring the device's voltage ($V$) and current ($I$) at a particular point in time: $P = IV$. The figure illustrates that the \textbf{web} scenario appears to be \emph{bursty}, with periods of great instantaneous power  intermixed with periods of lower instantaneous power. \cref{fig:coreson} gives a trace of the \textbf{web} application illustrating the cores that are powered on and off on the device over the execution of the scenario for the \emph{Sleepy Scheduler}. \cref{fig:freq} shows the modulating of frequency for each core classification (small, medium and large) for the same \textbf{web} application, again, using the \emph{sleepy Scheduler}.
+
+ 
+%\noindent
+%\cref{tab:usecase} shows our preliminary results so far obtained on the Pixel 6a device, where we only report evaluation figures for three of the benchmarks (idle, social media and web) due to unforeseen crashing in the execution. The idle benchmark performs slightly worse in terms of energy with our technique, reporting 27 J of energy instead of 25 J in the baseline case. The frames-per-second (FPS) and the Janky frames can not be measured for the idle application. For social media, our technique performs much better, with 59.61 J of energy vs. 117.72 J in the baseline case, a 50.62\% decrease in energy consumption. Unfortunately, however, the QoS drops, from 44 FPS and 0.7 Janky frames in the basecase, to 12 FPS and 88.9 Janky frams for our technique. Finally the web application performs better too: 54 J of energy consumption vs. 169 J of energy consumption in the baseline case, a 68\% reduction in energy consumption. Again, however, the QoS drops, from 30 FPS to 10 FPS and 1.34 Janky frames to 85 Janky frames. We believe the drops in QoS are due to an over agresssive selection filter being applied. We intend to tune this selection figure and fix the crashing issues for the final submission of the paper. 
+
+
+
 
 
   
@@ -433,51 +535,9 @@ We evaluate our technique over five use case scenarios, representing a realistic
 % \end{center}
 %\end{table}
 
-\begin{table*}
-\renewcommand{\arraystretch}{1.3}
-\caption{mean values of baseline compared with our technique using 8 cores across 10 runs.}
-\label{tab:usecase}
-\centering
-%\resizebox{12cm}{!}{
-\begin{tabular}{|c|c|c|c|c|c|c|}
-\hline
-\textbf{Benchmark} & \textbf{Base Energy} & \textbf{Our Energy} &  \textbf{Base FPS} & \textbf{Our FPS} & \textbf{Base Janky} & \textbf{Our Janky} \\
-\hline
-      Idle &  25.35 J &  27 J  & N/A & N/A & N/A & N/A \\ 
-      Social Media & 117.74 J & 59.61 J & 44 & 12 & 0.7 & 88.9 \\
-      Web & 169 J & 54 J & 30.7 & 10.35 & 1.34 & 85.68 \\
-     % 4S & 730 J & \textbf{-9.75\%} & 1.58 JFPS & \textbf{170.5\%} \\
-     % 4S + 2M & 721 J & \textbf{-10.86\%} & 0.56 JFPS & \textbf{-3.9\%}\\
-     % 4S + 2L & 1057 J &  \textbf{30.717\%} & 0.54 JFPS & \textbf{-6.8\%}\\
-     % Our system & X J &  \textbf{X\%} & X & \textbf{X\%}\\
-      \hline
-\end{tabular}
-%}
-
-\end{table*}
 
 
 
-\begin{table*}
-\renewcommand{\arraystretch}{1.3}
-\caption{Energy Consumption and Quality of Service of the Social Media Scenario Under Different CPU Configurations}
-\label{tab:energymusic}
-\centering
-\begin{tabular}{|c|c|c|c|c|c|}
-\hline
-\textbf{Cores on} & \textbf{Energy} & \textbf{Energy Diff} &  \textbf{QoS} & \textbf{QoS Diff} \\
-\hline
-      All &  809 J &     \textbf{0\%}  & 0.58 JankyFPS & \textbf{0\%} \\ 
-      1S & 737 J & \textbf{-8.79\%} & 3.47 JFPS & \textbf{494.0\%} \\
-      2S & 757 J & \textbf{-6.39\%} & 4.70 JFPS & \textbf{705.1\%} \\
-      4S & 730 J & \textbf{-9.75\%} & 1.58 JFPS & \textbf{170.5\%} \\
-      4S + 2M & 721 J & \textbf{-10.86\%} & 0.56 JFPS & \textbf{-3.9\%}\\
-      4S + 2L & 1057 J &  \textbf{30.717\%} & 0.54 JFPS & \textbf{-6.8\%}\\
-  %  Our system & X J &  \textbf{X\%} & X & \textbf{X\%}\\
-      
-      \hline
-\end{tabular}
-\end{table*}
 
 
 
